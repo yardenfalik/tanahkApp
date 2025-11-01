@@ -170,5 +170,15 @@ const showHome = () => {
   home.style.display = "flex";
 };
 
+if(window.navigator.standalone == true)
+{
+  document.getElementById('pwa-alert').style.display = 'none';
+}
+
+function handleInstallClick()
+{
+  document.getElementById('pwa-alert').style.display = 'none';
+}
+
 initTanakhIndex();
 showHome();

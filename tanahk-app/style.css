@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=swap');
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+
+    font-family: "Alef", sans-serif;
+    position: absolute;
+    top: 0;
+
+    display: flex;
+}
+
+.material-symbols-rounded {
+  font-variation-settings:
+  'FILL' 0
+}
+
+.material-symbols-rounded.activated {
+  font-variation-settings:
+  'FILL' 1
+}
+
+.prevChapter, .nextChapter {
+    border-radius: 50%;
+    border: none;
+    background-color: #ffffff;
+    color: #333333;
+    aspect-ratio: 1;
+    width: 40px;
+    box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;
+
+    z-index: 1;
+    position: fixed;
+    bottom: 100px;
+
+    font-size: large;
+
+    cursor: pointer;
+    padding: 5px;
+}
+
+.prevChapter {
+    right: 10px;
+}
+
+.prevChapter img {
+    transform: rotate(-90deg);
+    filter: invert(1);
+    width: 15px;
+}
+
+.nextChapter {
+    left: 10px;
+}
+
+.nextChapter img {
+    transform: rotate(90deg);
+    filter: invert(1);
+    width: 15px;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    gap: 20px;
+
+    transition: all 0.5s ease-in-out;
+}
+
+.home img {
+    border-radius: 10px;
+}
+
+.chapterContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    position: relative;
+
+    display: none;
+
+    transition: all 0.5s ease-in-out;
+}
+
+.chapterTitle {
+    width: fit-content;
+    background-color: #eeeef2;
+    border-radius: 50px;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.chapterHeader {
+    display: flex;
+    background-color: #ffffff;
+    width: 100%;
+    top: 0;
+    position: fixed;
+    border-bottom: solid 1px #eeeeee;
+
+    height: fit-content;
+}
+
+.bookList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-weight: 200;
+}
+
+.bookList details > summary {
+  list-style: none;
+}
+.bookList details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.bookList li {
+    padding: 10px;
+    border-bottom: solid 1px #eeeeee;
+    cursor: pointer;
+}
+
+.booksList {
+    margin: 10px;
+    padding: 0;
+}
+
+.booksList h3 {
+    text-align: center;
+}
+
+
+.booksContainer {
+    direction: rtl;
+    text-align: right;
+
+    display: flex;
+    justify-content: center;
+    
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: #FAFAFA;
+    
+    height: 90%;
+    transform: translateY(100%);
+
+    box-shadow: 0 0 10px 0 #0000001a;
+    border-radius: 15px 15px 0 0;
+
+    z-index: 10;
+
+    display: block;
+    transition: transform 0.5s ease-in-out;
+
+    overflow-y: auto;
+}
+
+.booksContainer.show {
+    transform: translateY(0);
+}
+
+.chapterText {
+    margin-top: 50px;
+    font-size: 200%;
+}
+
+.verse-number {
+    font-size: 50%;
+    font-weight: 200;
+}
+
+.chapters {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 5px;
+}
+
+.chapterItem {
+    background-color: #ffffff;
+    border-radius: 10px;
+    aspect-ratio: 1;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 2px 0 #00000033;
+}
+
+.settingsCloseBtn {
+    position: fixed;
+    margin-top: 10px;
+    left: 10px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+    top: 0;
+}
+
+.navBar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 90px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px 0 #0000001a;
+    display: flex;
+    align-items: center;
+    
+    z-index: 20;
+    justify-content: space-around;
+
+    border: solid 1px #eeeeee;
+}
+
+.navBar .material-symbols-outlined {
+    font-size: 30px;
+}
+
+.navBar .navItem {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: bold;
+}

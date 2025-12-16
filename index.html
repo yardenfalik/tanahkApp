@@ -19,35 +19,45 @@
 <body>
 
     <div class="home" id="home">
-        <img src="img/logo.png" width="250px" class="homeLogo">
-        <h1 class="homeTitle">תנ"ך</h1>
-
+        <div class="top-nav-bar">
+            <h1 class="today-title">היום</h1>
+        </div>
+        <div class="greeting-container">
+            <h3 id="hebrewDateContainer" class="hebrew-date-container"></h3>
+            <h3 id="greeting" class="greeting"></h3>
+        </div>
+        <div class="home-container parashat-hashavua-container">
+            <h2 class="parashat-hashavua-title" id="parashat-hashavua-title">פרשת השבוע</h2>
+            <p id="parashat-hashavua" class="parashat-hashavua"></p>
+        </div>
         <p style="font-size:12px; text-align:center;">Using an API from <a href="https://www.sefaria.org" target="_blank">Sefaria</a></p>
     </div>
 
-    <div id="chapter-container" class="chapterContainer">
-        <div class="chapterHeader">
-            <p id="chapter-title" class="chapterTitle" onclick="showBooksList()"></p>
+    <div class="readPage" id="readPage">
+        <div id="chapter-container" class="chapterContainer">
+            <div class="chapterHeader">
+                <p id="chapter-title" class="chapterTitle" onclick="showBooksList()"></p>
+            </div>
+            <div id="chapter-text" class="chapterText"></div>
+            <div style="height: 100px;"></div>
+            <button id="prev-chapter" class="prevChapter"><img src="img/downArrow.png"></button>
+            <button id="next-chapter" class="nextChapter"><img src="img/downArrow.png"></button>
         </div>
-        <div id="chapter-text" class="chapterText"></div>
-        <div style="height: 100px;"></div>
-        <button id="prev-chapter" class="prevChapter"><img src="img/downArrow.png"></button>
-        <button id="next-chapter" class="nextChapter"><img src="img/downArrow.png"></button>
-    </div>
 
-    <div id="books-container" class="booksContainer">
-        <a id="booksListCloseBtn" class="settingsCloseBtn">Cancel</a>
-        <ul id="books-list"></ul>
+        <div id="books-container" class="booksContainer">
+            <a id="booksListCloseBtn" class="settingsCloseBtn">Cancel</a>
+            <ul id="books-list"></ul>
+        </div>
     </div>
 
     <div class="navBar" id="navBar">
-        <div class="navItem" onclick="showHome()">
-            <span class="material-symbols-rounded">home</span>
-            <span class="navTitle">בית</span>
-        </div>
         <div class="navItem" onclick="showChapter()">
             <span class="material-symbols-rounded">book</span>
             <span class="navTitle">תנ"ך</span>
+        </div>
+        <div class="navItem" onclick="showHome()">
+            <span class="material-symbols-rounded">home</span>
+            <span class="navTitle">בית</span>
         </div>
     </div>
 
@@ -56,6 +66,10 @@
         <button onclick="handleInstallClick()"><img class="xIcon" src="./XIcon.png" alt="X"></button>
     </div>
 
+    <script src="localstorage.js"></script>
     <script src="main.js"></script>
+    <script src="readBible.js"></script>
+    <script src="home.js"></script>
+    
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,8 +23,8 @@
             <h1 class="today-title">היום</h1>
         </div>
         <div class="greeting-container">
-            <h3 id="hebrewDateContainer" class="hebrew-date-container"></h3>
             <h3 id="greeting" class="greeting"></h3>
+            <h3 id="hebrewDateContainer" class="hebrew-date-container"></h3>
         </div>
         <div class="home-container parashat-hashavua-container" id="parashat-hashavua-container">
             <h2 class="parashat-hashavua-title" id="parashat-hashavua-title">פרשת השבוע</h2>
@@ -51,13 +51,13 @@
     </div>
 
     <div class="navBar" id="navBar">
-        <div class="navItem" onclick="showChapter()">
-            <span class="material-symbols-rounded">book</span>
-            <span class="navTitle">תנ"ך</span>
-        </div>
         <div class="navItem" onclick="showHome()">
             <span class="material-symbols-rounded">home</span>
             <span class="navTitle">בית</span>
+        </div>
+        <div class="navItem" onclick="showChapter()">
+            <span class="material-symbols-rounded">book</span>
+            <span class="navTitle">תנ"ך</span>
         </div>
     </div>
 

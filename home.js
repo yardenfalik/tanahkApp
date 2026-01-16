@@ -11,7 +11,7 @@ const initHome = async () => {
     const parashatHashavuaTitle = document.getElementById("parashat-hashavua-title");
 
     parashatHashavuaTitle.innerText = sefariaCalendar.calendar_items[0].title.he + " - " + sefariaCalendar.calendar_items[0].displayValue.he;
-    parashatHashavua.innerText = sefariaCalendar.calendar_items[0].description.he;
+    parashatHashavua.innerHTML = `${sefariaCalendar.calendar_items[0].description.he} <a href='#'>לקריאה...</a>`;
 
     parashatHashavuaContainer.onclick = () => {
       showChapter(sefariaCalendar.calendar_items[0].url);

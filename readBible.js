@@ -78,10 +78,10 @@ const showBooksList = () => {
                         chapterItem.textContent = `${hebrewLetters[i - 1]}`;
 
                         chapterItem.onclick = (e) => {
-                            selectedBook = book.title.replace(" ", "_");
-                            chapterNumber = i;
-                            updateStorage();
-                            showChapter();
+                          selectedBook = book.title.replace(" ", "_");
+                          chapterNumber = i;
+                          updateStorage();
+                          showChapter();
                         };
 
                         chapters.appendChild(chapterItem);
@@ -105,13 +105,20 @@ const showBooksList = () => {
     });
 }
 
-async function showChapter() {
-    chapterContainer.style.display = "block";
-    home.style.display = "none";
+const updateChapterNumber = (newChapterNumber) => {
+  chapterNumber = newChapterNumber;
+  updateStorage();
+};
 
-  const response = await fetch(
-    `${baseUrl}/v3/texts/${selectedBook}.${chapterNumber}?lang=he`
-  );
+async function showChapter(chapterUrl) {
+  chapterContainer.style.display = "block";
+  home.style.display = "none";
+
+  if (!chapterUrl) {
+    chapterUrl = `${selectedBook}.${chapterNumber}`;
+  }
+
+  const response = await fetch(`${baseUrl}/v3/texts/${chapterUrl}?lang=he`);
   const data = await response.json();
 
   const hebrewVersion = data.versions.find(v => v.actualLanguage === "he");
@@ -140,13 +147,13 @@ async function showChapter() {
 
 prevBtn.onclick = () => {
   if (chapterNumber > 1) {
-    chapterNumber--;
+    updateChapterNumber(chapterNumber - 1);
     showChapter();
   }
 };
 
 nextBtn.onclick = () => {
-  chapterNumber++;
+  updateChapterNumber(chapterNumber + 1);
   showChapter();
 };
 

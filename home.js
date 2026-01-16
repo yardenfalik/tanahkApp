@@ -6,11 +6,16 @@ const initHome = async () => {
     
     greeting.innerText = greetByTime();
 
+    const parashatHashavuaContainer = document.getElementById("parashat-hashavua-container");
     const parashatHashavua = document.getElementById("parashat-hashavua");
     const parashatHashavuaTitle = document.getElementById("parashat-hashavua-title");
 
     parashatHashavuaTitle.innerText = sefariaCalendar.calendar_items[0].title.he + " - " + sefariaCalendar.calendar_items[0].displayValue.he;
     parashatHashavua.innerText = sefariaCalendar.calendar_items[0].description.he;
+
+    parashatHashavuaContainer.onclick = () => {
+      showChapter(sefariaCalendar.calendar_items[0].url);
+    };
 
     getCalendarDate().then(data => {
         hebrewDateContainer.innerText = data.hebrew;

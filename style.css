@@ -97,10 +97,16 @@ a {
     box-shadow: 0 2px 4px 0 #0000001a;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
+    
     position: sticky;
     top: 0;
     z-index: 20;
+}
+
+.streak-container {
+    display: flex;
+    align-items: center;
 }
 
 .greeting-container {

@@ -1,10 +1,12 @@
 const hebrewDateContainer = document.getElementById("hebrewDateContainer");
 const greeting = document.getElementById("greeting");
+const streakNumber = document.getElementById("streak-number");
 
 const initHome = async () => {
     const sefariaCalendar = await getCalendarSefaria();
     
     greeting.innerText = greetByTime();
+    streakNumber.innerText = streak;
 
     const parashatHashavuaContainer = document.getElementById("parashat-hashavua-container");
     const parashatHashavua = document.getElementById("parashat-hashavua");

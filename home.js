@@ -19,6 +19,28 @@ const initHome = async () => {
       showChapter(sefariaCalendar.calendar_items[0].url);
     };
 
+    const hadafHayomiContainer = document.getElementById("hadaf-hayomi-container");
+    const hadafHayomi = document.getElementById("hadaf-hayomi");
+    const hadafHayomiTitle = document.getElementById("hadaf-hayomi-title");
+
+    hadafHayomiTitle.innerText = sefariaCalendar.calendar_items[2].title.he + " - " + sefariaCalendar.calendar_items[2].displayValue.he;
+    hadafHayomi.innerHTML = `סדר לימוד לתלמוד הבבלי הכולל לימוד של דף אחד בכל יום. הלומדים בדרך זו מסיימים את קריאת התלמוד כולו בתוך כשבע שנים וחצי. <a href='#'>לקריאה...</a>`;
+
+    hadafHayomiContainer.onclick = () => {
+      showChapter(sefariaCalendar.calendar_items[2].url);
+    };
+
+    const haftaraContainer = document.getElementById("haftara-container");
+    const haftara = document.getElementById("haftara");
+    const haftaraTitle = document.getElementById("haftara-title");
+
+    haftaraTitle.innerText = sefariaCalendar.calendar_items[1].title.he + " - " + sefariaCalendar.calendar_items[1].displayValue.he;
+    haftara.innerHTML = `קטע קבוע לכל פרשה מספרי הנביאים הנקרא בכל שבת ומועד, ויש לו קשר רעיוני לפרשת השבוע. <a href='#'>לקריאה...</a>`;
+
+    haftaraContainer.onclick = () => {
+      showChapter(sefariaCalendar.calendar_items[1].url);
+    };
+
     getCalendarDate().then(data => {
         hebrewDateContainer.innerText = data.hebrew;
     });

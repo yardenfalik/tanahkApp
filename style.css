@@ -16,6 +16,8 @@ body {
     top: 0;
 
     display: flex;
+
+    background-color: #fdfdfd;
 }
 
 a {
@@ -112,28 +114,32 @@ a {
 .greeting-container {
     display: flex;
     justify-content: space-around;
-    background-color: #f6f4f5;
     width: 100%;
 }
 
 .parashat-hashavua-container {
+    
+    
+    
+}
+
+.home-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 5px;
-    background-color: #f7f3f2;
-    border-radius: 5px;
-    width: 95%;
-    height: fit-content;
-    top: 100px;
-}
-
-.home-container {
     margin-top: 20px;
+    background-color: #f7f3f2;
+    width: 95%;
+    top: 100px;
+    height: fit-content;
+    border-radius: 5px;
+
+  box-shadow: #6f6f6f27 0 0px 10px 0px;
 }
 
-.parashat-hashavua-title {
+.home-container > .title {
     margin: 0;
     font-size: 1.2em;
     font-weight: bold;
@@ -142,7 +148,7 @@ a {
     width: 95%;
 }
 
-.parashat-hashavua {
+.home-container > .home-text {
     margin: 0;
     font-size: 1em;
     font-weight: normal;

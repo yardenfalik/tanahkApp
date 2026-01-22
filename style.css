@@ -148,6 +148,11 @@ a {
     width: 95%;
 }
 
+.home-container > img {
+    width: 100%;
+    border-radius: 10px;
+}
+
 .home-container > .home-text {
     margin: 0;
     font-size: 1em;

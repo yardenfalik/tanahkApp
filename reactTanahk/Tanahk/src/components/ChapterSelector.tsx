@@ -1,98 +1,94 @@
-import "./ChapterSelector.css"
+import "./ChapterSelector.css";
 import { baseUrl, hebrewLetters } from "../utils/utils";
 import { useState } from "react";
 
-type Book = {
+export type Book = {
   title: string;
   heTitle: string;
 };
 
-type Section = {
+export type Section = {
+  category: string;
   heCategory: string;
   contents: Book[];
 };
 
-export type ChapterSelectorProps = {
+type ChapterSelectorProps = {
   tanakhIndex: Section[];
+  isOpen: boolean;
+  onClose: () => void;
+  onSelectChapter: (book: string, chapter: number) => void;
 };
 
-const getChapterCount = async (book: string) => {
-    const response = await fetch(`${baseUrl}/shape/${book}`);
-    const data = await response.json();
+export const ChapterSelector: React.FC<ChapterSelectorProps> = ({
+  tanakhIndex,
+  isOpen,
+  onClose,
+  onSelectChapter,
+}) => {
+  const [openBooks, setOpenBooks] = useState<Record<string, number>>({});
 
-    return data[0].length;
-}
+  const handleBookClick = async (book: { title: string }) => {
+    if (book.title in openBooks) return;
 
-export const ChapterSelector: React.FC<ChapterSelectorProps> = ({ tanakhIndex }) => {
-    
-    //let tanakhIndex = await initTanakhIndex();
-    //console.log(tanakhIndex);
+    const chapterCount = await fetch(`${baseUrl}/shape/${book.title}`)
+      .then(res => res.json())
+      .then(data => data[0].length);
 
-    const [openBooks, setOpenBooks] = useState<Record<string, number>>({});
-    const [selectedBook, setSelectedBook] = useState<string | null>(null);
-    const [chapterNumber, setChapterNumber] = useState<number | null>(null);
+    setOpenBooks(prev => ({ ...prev, [book.title]: chapterCount }));
+  };
 
-    function handleBookClick(book: Book): void {
-        if (openBooks[book.title]) return;
+  return (
+    <div
+      id="books-container"
+      className={`booksContainer ${isOpen ? "open" : ""}`}
+    >
+      <a
+        id="booksListCloseBtn"
+        className="settingsCloseBtn"
+        onClick={onClose}
+      >
+        Cancel
+      </a>
 
-        const chapterCount = await getChapterCount(book.title);
-        setOpenBooks(prev => ({
-        ...prev,
-        [book.title]: chapterCount,
-        }));
-    };
+      <ul id="books-list" className="booksList">
+        {tanakhIndex.map(section => (
+          <div key={section.heCategory}>
+            <h3>{section.heCategory}</h3>
+            <ul className="bookList">
+              {section.contents.map(book => (
+                <li key={book.title}>
+                  <details>
+                    <summary onClick={() => handleBookClick(book)}>
+                      {book.heTitle}
+                    </summary>
 
-    const handleChapterClick = (book: Book, chapter: number) => {
-        setSelectedBook(book.title.replace(" ", "_"));
-        setChapterNumber(chapter);
-        //updateStorage();
-        //showChapter();
-    };
-
-    }
-
-    return (
-        <>
-            <div id="books-container" className="booksContainer">
-                <a id="booksListCloseBtn" className="settingsCloseBtn">Cancel</a>
-                <ul id="books-list">
-                    {
-                        [...tanakhIndex].map(section => (
-                        <div key={section.heCategory}>
-                            <h3>{section.heCategory}</h3>
-                            <ul className="bookList booksList">
-                            {section.contents.map((book: Book) => (
-                                <li key={book.title}>
-                                    <details onClick={() => handleBookClick(book)}>
-                                    <summary>{book.heTitle}</summary>
-
-                                    {openBooks[book.title] && (
-                                        <div className="chapters">
-                                        {Array.from(
-                                            { length: openBooks[book.title] },
-                                            (_, i) => (
-                                            <div
-                                                key={i}
-                                                className="chapterItem"
-                                                onClick={e => {
-                                                e.stopPropagation();
-                                                handleChapterClick(book, i + 1);
-                                                }}
-                                            >
-                                                {hebrewLetters[i]}
-                                            </div>
-                                            )
-                                        )}
-                                        </div>
-                                    )}
-                                    </details>
-                                </li>
-                                ))}
-                            </ul>
+                    {openBooks[book.title] && (
+                      <div className="chapters">
+                        {Array.from(
+                          { length: openBooks[book.title] },
+                          (_, i) => (
+                            <div
+                              key={i}
+                              className="chapterItem"
+                              onClick={e => {
+                                e.stopPropagation();
+                                onSelectChapter(book.title, i + 1);
+                              }}
+                            >
+                              {hebrewLetters[i]}
                             </div>
-                        ))}
-                </ul>
-            </div>
-        </>
-    );
-}
+                          )
+                        )}
+                      </div>
+                    )}
+                  </details>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </ul>
+    </div>
+  );
+};

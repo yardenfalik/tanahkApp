@@ -48,6 +48,10 @@
     transition: all 0.5s ease-in-out;
 }
 
+.chapterContainer.inactive {
+    filter: blur(3px);
+}
+
 .chapters {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));

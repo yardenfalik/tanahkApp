@@ -1,70 +1,86 @@
 import "./ReadPage.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { baseUrl } from "../utils/utils";
 import { ReadText } from "./ReadText";
 import { ChapterHeader } from "./ChapterHeader";
 
 import downArrow from "../assets/icons/downArrow.png";
-import { ChapterSelector, type ChapterSelectorProps } from "./ChapterSelector";
+import { ChapterSelector, type Section } from "./ChapterSelector";
 
 type ReadPageProp = {
     chapterUrl?: string
 }
 
-const selectedBook = "Genesis";
-const chapterNumber = 1;
-
-export function ReadPage({chapterUrl}: ReadPageProp) {
+export function ReadPage({ chapterUrl }: ReadPageProp) {
+    const [tanakhIndex, setTanakhIndex] = useState<Section[]>([]);
+    const [selectedBook, setSelectedBook] = useState("Genesis");
+    const [chapterNumber, setChapterNumber] = useState(1);
     const [chapterTitle, setChapterTitle] = useState("");
-    const [chapterText, setChapterText] = useState([""]);
+    const [chapterText, setChapterText] = useState<string[]>([]);
+    const [isSelectorOpen, setIsSelectorOpen] = useState(false);
 
-    showChapter();
+    useEffect(() => {
+        initTanakhIndex();
+    }, []);
 
-    async function showChapter(chapterUrl?: string) {
-        if (!chapterUrl) {
-            chapterUrl = `${selectedBook}.${chapterNumber}`;
-        }
+    useEffect(() => {
+        showChapter();
+    }, [selectedBook, chapterNumber]);
 
-        const response = await fetch(`${baseUrl}/v3/texts/${chapterUrl}?lang=he`);
+    const initTanakhIndex = async () => {
+        const response = await fetch(`${baseUrl}/index`);
         const data = await response.json();
 
-        const hebrewVersion = data.versions.find((v: { actualLanguage: string; }) => v.actualLanguage === "he");
+        const tanakh = data.find((cat: any) => cat.category === "Tanakh");
+        if (!tanakh) return;
+
+        setTanakhIndex(
+        tanakh.contents.filter((section: Section) =>
+            ["Torah", "Prophets", "Writings"].includes(section.category)
+        )
+        );
+    };
+
+    const showChapter = async () => {
+        const url = chapterUrl ?? `${selectedBook}.${chapterNumber}`;
+        const response = await fetch(`${baseUrl}/v3/texts/${url}?lang=he`);
+        const data = await response.json();
+
+        const hebrewVersion = data.versions.find(
+        (v: any) => v.actualLanguage === "he"
+        );
 
         setChapterTitle(data.heRef);
         setChapterText(hebrewVersion.text);
-    }
-
-    if (chapterNumber > 1) {
-        //prevBtn.style.display = "block";
-    } else {
-        //prevBtn.style.display = "none";
-    }
-
-    async function initTanakhIndex(): ChapterSelectorProps {
-        const response = await fetch(`${baseUrl}/index`);
-        let tanakhIndex = await response.json();
-
-        const tanakh = tanakhIndex.find((cat: { category: string; }) => cat.category === "Tanakh");
-
-        tanakhIndex = tanakh.contents.filter((section: { category: string; }) =>
-            ["Torah", "Prophets", "Writings"].includes(section.category)
-        );
-        
-        return Promise.resolve(tanakhIndex);
-    }
-
-
+    };
+    
     return (
         <>
-            <ChapterSelector tanakhIndex={initTanakhIndex()}></ChapterSelector>
-            <div className="readPage" id="readPage">
-                <div id="chapter-container" className="chapterContainer">
-                    <ChapterHeader chapterTitle={chapterTitle}></ChapterHeader>
-                    <ReadText chapterText={chapterText}></ReadText>
-                    <button id="prev-chapter" className="prevChapter"><img src={downArrow}></img></button>
-                    <button id="next-chapter" className="nextChapter"><img src={downArrow}></img></button>
-                </div>
-            </div>
+            <ChapterSelector
+            tanakhIndex={tanakhIndex}
+            isOpen={isSelectorOpen}
+            onClose={() => setIsSelectorOpen(false)}
+            onSelectChapter={(book, chapter) => {
+                setSelectedBook(book);
+                setChapterNumber(chapter);
+                setIsSelectorOpen(false);
+            }}
+            />
+
+        <div className={`chapterContainer ${isSelectorOpen ? "inactive" : ""}`}>
+            <ChapterHeader chapterTitle={chapterTitle} onClick={() => setIsSelectorOpen(true)} />
+            <ReadText chapterText={chapterText} />
+
+            {chapterNumber > 1 && (
+            <button onClick={() => setChapterNumber(n => n - 1)} className="prevChapter">
+                <img src={downArrow} alt="previous chapter" />
+            </button>
+            )}
+
+            <button onClick={() => setChapterNumber(n => n + 1)} className="nextChapter">
+            <img src={downArrow} alt="next chapter" />
+            </button>
+        </div>
         </>
     );
 }

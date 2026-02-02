@@ -1,13 +1,15 @@
 import "./ChapterHeader.css"
 
 type ChapterHeaderProp = {
-    chapterTitle: string
-}
+    chapterTitle: string;
+    onClick?: () => void;
+};
 
-export function ChapterHeader({chapterTitle}: ChapterHeaderProp) {
+
+export function ChapterHeader({chapterTitle, onClick}: ChapterHeaderProp) {
     return (
         <>
-            <div className="chapterHeader">
+            <div className="chapterHeader" onClick={onClick}>
                 <p id="chapter-title" className="chapterTitle">{ chapterTitle }</p>
             </div>
         </>

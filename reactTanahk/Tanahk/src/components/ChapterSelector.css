@@ -1,0 +1,87 @@
+.bookList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-weight: 200;
+}
+
+.bookList details > summary {
+  list-style: none;
+}
+.bookList details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.bookList li {
+    padding: 10px;
+    border-bottom: solid 1px #eeeeee;
+    cursor: pointer;
+}
+
+.booksList {
+    margin: 10px;
+    padding: 0;
+}
+
+.booksList h3 {
+    text-align: center;
+}
+
+
+.booksContainer {
+    direction: rtl;
+    text-align: right;
+
+    display: flex;
+    justify-content: center;
+    
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: #FAFAFA;
+    
+    height: 90%;
+  
+
+    box-shadow: 0 0 10px 0 #0000001a;
+    border-radius: 15px 15px 0 0;
+
+    z-index: 10;
+
+    display: block;
+    transition: transform 0.5s ease-in-out;
+
+    overflow-y: auto;
+}
+
+.booksContainer.show {
+    transform: translateY(0);
+}
+
+.chapters {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 5px;
+}
+
+.chapterItem {
+    background-color: #ffffff;
+    border-radius: 10px;
+    aspect-ratio: 1;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 2px 0 #00000033;
+}
+
+.settingsCloseBtn {
+    position: fixed;
+    margin-top: 10px;
+    left: 10px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+    top: 0;
+}

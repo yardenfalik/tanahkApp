@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=swap');
+
+:root {
+  font-family: "Alef", sans-serif;
+  text-align: right;
+  color-scheme: light dark;
+  color: #ffffffde;
+  background-color: #242424;
+  direction: rtl;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+a {
+  font-weight: 500;
+  color: #9a2414;
+  text-decoration: inherit;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+
+  position: absolute;
+  top: 0;
+
+  display: flex;
+
+  background-color: #fdfdfd;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #9a2414;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

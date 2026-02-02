@@ -1,0 +1,20 @@
+.chapterTitle {
+    width: fit-content;
+    background-color: #eeeef2;
+    border-radius: 50px;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 16px 0;
+}
+
+.chapterHeader {
+    display: flex;
+    background-color: #ffffff;
+    width: 100%;
+    top: 0;
+    position: sticky;
+    border-bottom: solid 1px #eeeeee;
+
+    height: fit-content;
+}

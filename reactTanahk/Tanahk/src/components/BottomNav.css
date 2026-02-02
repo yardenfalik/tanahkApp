@@ -1,0 +1,28 @@
+.navBar {
+    position: sticky;
+    bottom: 0;
+    height: 90px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px 0 #0000001a;
+    display: flex;
+    align-items: center;
+
+    justify-content: space-around;
+
+    border: solid 1px #eeeeee;
+}
+
+.navBar .material-symbols-outlined {
+    font-size: 30px;
+}
+
+.navBar .navItem {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: bold;
+}

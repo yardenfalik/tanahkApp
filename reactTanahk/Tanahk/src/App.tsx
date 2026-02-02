@@ -1,11 +1,15 @@
-import { ReadPage } from './components/readPage'
 import './App.css'
+import { ReadPage } from './components/ReadPage'
+import { BottomNav } from './components/BottomNav'
 
 function App() {
   
 
   return (
-    <ReadPage></ReadPage>
+    <>
+      <ReadPage></ReadPage>
+      <BottomNav></BottomNav>
+    </>
   )
 }
 

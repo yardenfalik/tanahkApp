@@ -1,0 +1,23 @@
+.home-container > .title {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    text-align: right;
+    width: 95%;
+}
+
+.home-container > img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.text {
+    margin: 0;
+    font-size: 1em;
+    font-weight: normal;
+    color: #555;
+    text-align: right;
+    width: 95%;
+    margin-bottom: 10px;
+}
